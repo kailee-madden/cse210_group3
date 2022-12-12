@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/tripDetail.css">
+    <link rel="manifest" href="../manifest.json"/>
+    <link rel="icon" type="image/x-icon" href="../resources/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-status-bar" content="#db4938">
+    <meta name="theme-color" content="#db4938">
+    <title>Diversity Travel PWA</title>
+  </head>
+
+  <body>
+    <main>
+      <div class="row">
+        <div class="col-3">
+          <logo-component></logo-component>
+        </div>
+        <div class="col-6">
+          <div id="trip-name"></div>
+        </div>
+        <div class="col-2 gy-5">
+          <div class="row justify-content-end">
+            <!-- <button is="landing-button">Future Trips</button> -->
+            <button id="futureTrips" class="btn btn-primary m-3 p-3 btn-lg">Future Trips</button>
+          </div>
+          <div class="row justify-content-end">
+            <button id="exportTrip" class="btn btn-secondary m-3 p-3 btn-lg">Export Trip</button>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Edit Location -->
+      <div class="modal fade" id="editLocation" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-2" id="exampleModalLabel">Edit Trip Location</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body where">
+              <input id="newLocation" class="input-box1" name="location" type="text" placeholder="New Location" required/>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info changes" onclick="editTripLocation()" data-bs-dismiss="modal" >Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Edit Dates -->
+      <div class="modal fade" id="editDates" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-3" id="exampleModalLabel">Edit Trip Dates</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body dates">
+              <input id="newStartDate" class="input-box2" name="startDate" type="text" placeholder="Start Date" 
+              onfocus="(this.type='date')" onblur="(this.type='text')" required pattern="\d{4}-\d{2}-\d{2}"/>
+              <input id="newEndDate" class="input-box2" name="endDate" type="text" placeholder="End Date" 
+              onfocus="(this.type='date')" onblur="(this.type='text')" required pattern="\d{4}-\d{2}-\d{2}"/>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info changes" data-bs-toggle="modal" data-bs-target="#updateDateModal" >Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Confirm Update Dates Modal -->
+      <div class="modal fade" id="updateDateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fs-3" id="updateDateModalLabel">Are you sure you want to change the dates? Events will be lost for days that get removed.</h5>
+            </div>
+            <div class="modal-body">
+              <div class="row decisionButtons">
+                <div class="col">
+                  <button type="button" id="updateDates" class="btn btn-secondary" data-bs-dismiss="modal" onclick="editTripDates()">
+                    Yes! Update dates.
+                  </button>
+                </div>
+                <div class="col">
+                  <button type="button" id="keepDates" class="btn btn-info" data-bs-dismiss="modal">
+                    No! Do not update.
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Edit Event -->
+      <div class="modal fade" id="editEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" event-id="">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-2" id="exampleModalLabel">Edit Event</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="where">
+                <input id="newStartTime" class="input-box1" type="text" placeholder="Event Time" onfocus="(this.type='time')" onblur="(this.type='text')"/>
+              </div>
+              <br>
+              <div class="where">
+                <input id="newLocationDetails" class="input-box1" type="text" placeholder="Where? (Optional)"/>
+              </div>
+              <br>
+              <div class="where">
+                <input id="newEventDetails" class="input-box1" type="text" placeholder="Event Detail"/>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info changes" onclick="editEventDetails()" data-bs-dismiss="modal" >Save</button>
+              <button type="button" class="btn btn-dark changes" onclick="deleteEvent()" data-bs-dismiss="modal" >Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Modal Add Event -->
+      <div class="modal fade" id="addEvent" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-2" id="exampleModalLabel">Add a new event</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="where">
+                <input id="startTime" class="input-box1" type="text" placeholder="Event Time" onfocus="(this.type='time')" onblur="(this.type='text')"/>
+              </div>
+              <br>
+              <div class="where">
+                <input id="locationDetails" class="input-box1" type="text" placeholder="Where? (Optional)"/>
+              </div>
+              <br>
+              <div class="where">
+                <input id="eventDetails" class="input-box1" type="text" placeholder="Event Detail"/>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-info changes" onclick="addNewEvent()" data-bs-dismiss="modal" >Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div id="carouselExampleControls" class="carousel slide" data-interval="false">
+          <!-- see js file for carousel items details -->
+          <div class="carousel-inner" id="oneday-details"></div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span><i class="bi bi-chevron-left" aria-hidden="true"></i></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span><i class="bi bi-chevron-right" aria-hidden="true"></i></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </div>
+    </main>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/tripDetail.js"></script>
+    <script src="components/logo.js" type="text/javascript"></script>
+    <script src="components/landingButton.js"></script>
+    <script type="module" src="../js/data/core/indexedDBKVStore.js"></script>
+    <script type="module" src="../js/data/core/abstractKvStore.js"></script>
+    <script type="module" src="../js/data/service/kvStoreDbService.js"></script>
+    <script type="module" src="../serviceworker.js"></script>
+  </body>
+</html>

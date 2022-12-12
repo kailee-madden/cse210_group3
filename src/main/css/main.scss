@@ -1,0 +1,32 @@
+// main.scss
+// Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+
+$theme-colors: (
+  "primary":   #99AF96,
+  "secondary": #6592A6,
+  "info":      #D98A74,
+  "success":   #ECBEA3,
+  "light":     #B9CBB1,
+  "dark":      #514644
+);
+
+$body-bg:                     #E2EDDD;
+$input-bg:                    #99AF96;
+
+$modal-content-bg:            #E2EDDD;
+$modal-content-border-color:  #514644;
+$modal-header-border-color:   #514644;
+$modal-footer-border-color:   #514644;
+
+$modal-content-border-width:    1px;
+$modal-header-border-width:    1px;
+$modal-footer-border-width:    1px;
+
+$modal-md:                      650px;
+$modal-content-border-radius:   15px;
+
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../node_modules/@fontsource/indie-flower/index.css";
+@import "../node_modules/bootstrap-icons/font/bootstrap-icons.css";

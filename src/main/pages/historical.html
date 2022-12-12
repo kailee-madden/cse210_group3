@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/historical.css">
+    <link rel="manifest" href="../manifest.json"/>
+    <link rel="icon" type="image/x-icon" href="../resources/images/icons/favicon.ico">
+    <meta name="apple-mobile-web-app-status-bar" content="#db4938">
+    <meta name="theme-color" content="#db4938">
+    <title>Diversity Travel PWA</title>
+  </head>
+
+  <body>
+    <main>
+      <div class="row" id="main-page">
+        <div class="col-3">
+          <logo-component></logo-component>
+        </div>
+        <div class="col-6">
+          <div id="past-trips">
+            <span class="display-6">Past Trips</span>
+          </div>
+          <div class="container" id="trips_container"></div>
+          <!-- Delete Trip Modal -->
+          <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fs-3" id="deleteModalLabel">Are you sure to delete this trip ?</h5>
+                  <button type="button" class="btn-close" style="font-size: medium;" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row decisionButtons">
+                    <div class="col">
+                      <button type="button" id="delete" class="btn btn-secondary" data-bs-dismiss="modal" onclick="deleteTrip()">
+                        Yes! Delete it.
+                      </button>
+                    </div>
+                    <div class="col">
+                      <button type="button" id="keep" class="btn btn-info" data-bs-dismiss="modal">
+                        No! Keep it.
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary closeFooter" data-bs-dismiss="modal">Back</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="trip-actions container">
+            <button id="load-more"><i class="bi bi-plus-lg"></i> View More</button>
+          </div>
+          <div class="trip-actions">
+            <span>
+              Showing <span id="trip-count"></span> of <span id="trip-total"></span> Trips
+            </span>
+          </div>
+        </div>
+        <div class="col-2 gy-5">
+          <div class="row justify-content-end">
+            <button id="futureTrips" class="btn btn-primary m-3 p-3 btn-lg">Future Trips</button>
+          </div>
+          <div class="row justify-content-end">
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../js/historical.js"></script>
+    <script src="components/logo.js" type="text/javascript"></script>
+    <script src="components/landingButton.js"></script>
+    <script type="module" src="../js/data/core/indexedDBKVStore.js"></script>
+    <script type="module" src="../js/data/core/abstractKvStore.js"></script>
+    <script type="module" src="../js/data/service/kvStoreDbService.js"></script>
+    <script type="module" src="../serviceworker.js"></script>
+  </body>
+</html>

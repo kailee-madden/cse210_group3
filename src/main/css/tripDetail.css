@@ -1,0 +1,212 @@
+
+body {
+  font-family: "Indie Flower";
+  font-size: 1.6rem;
+}
+
+main {
+  margin: auto;
+  padding: 0.8rem;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn {
+  width: 85%;
+  align-self: center;
+  transition: all 200ms ease-in-out;
+  color:#fff;
+  font-weight: bold;
+  font-size: x-large;
+  border: 1px solid var(--bs-dark);
+}
+
+.btn:hover {
+  box-shadow: 0 1px 9px var(--bs-light);
+  cursor: default;
+  color: #fff;
+  border: 1px solid var(--bs-dark);
+}
+
+.card-trip {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  min-width: 150px;
+  border-radius: 10px;
+  margin: 2rem auto;
+  overflow: auto;
+  transition: all 200ms ease-in-out;
+  border: 1px solid var(--bs-dark);
+}
+
+.card-trip {
+  box-shadow: 0 8px 20px var(--bs-light);
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  text-align: -webkit-center;
+}
+
+.card-title {
+  margin-top: 0.3rem;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.card-text {
+  color: #fff;
+  font-size: 1.7rem;
+}
+
+.bi-pencil {
+  color: var(--bs-dark);
+  font-size: 1.2rem;
+  margin-left: 5px;
+}
+
+
+.bi-chevron-left, .bi-chevron-right {
+  color: var(--bs-primary);
+  opacity: 200%;
+  font-size: 3rem;
+  -webkit-text-stroke: 2px;
+}
+
+.event-container {
+  width: 50%;
+  height: 65vh;
+  margin: auto;
+  padding: 10px;
+  border: 1px solid var(--bs-dark);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.event-day {
+  color: #222;
+  margin-top: 0.5rem;
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding-bottom: 30px;
+}
+
+.event-row {
+  padding-bottom: 10px;
+  padding-left: 5%;
+}
+
+.event-time {
+  /* using border left as the color bar */
+  border-left: thick solid;
+  border-left-width: 8px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding-inline: 15px;
+  color: var(--bs-dark);
+  font-size: larger;
+}
+
+.event-detail {
+  color: var(--bs-dark);
+  padding-inline: 10px;
+  font-size: smaller;
+  font-weight: lighter;
+}
+
+#add-event {
+  background-color: var(--bs-success);
+  transition: all 200ms ease-in-out;
+  color: var(--bs-dark);
+  font-weight: bold;
+  font-size: x-large;
+  border: 1px solid var(--bs-dark);
+  border-radius: 7px;
+  margin-top: 15%;
+}
+
+.input-box1 {
+  border-radius: 5px;
+  background-color: var(--bs-primary);
+  width: 70%;
+  text-align: center;
+}
+
+.input-box2 {
+  border-radius: 5px;
+  background-color: var(--bs-primary);
+  text-align: center;
+  width: 40%;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #222;
+  opacity: 1; /* Firefox */
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: #222;
+}
+
+.dates {
+  text-align: center;
+  padding-top: 5%;
+}
+
+.where {
+  text-align: center;
+}
+
+.changes {
+  width: 30%;
+  text-align: center;
+}
+
+.card-detail {
+  /* Collapse Card */
+  font-size: smaller;
+  text-align: left;
+  background: #E2EDDD;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  margin-inline: auto;
+  overflow: auto;
+  width: 90%;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  /* hide Chrome date picker icon */
+  opacity: 0;
+  position: relative;
+  left: 0%;
+  width: 3%;
+}
+
+.decisionButtons {
+  /* delete trip modal delete/keep buttons */
+  text-align: center;
+  padding: 5%;
+}
+
+#updateDates, #keepDates {
+  /* modal inputs */
+  font-weight: bold;
+  font-size: x-large;
+  border: 1px solid var(--bs-dark);
+}
+
+#updateDateModalLabel {
+  text-align: center;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color:  #6c757d;
+  opacity: 1; /* Firefox */
+}
